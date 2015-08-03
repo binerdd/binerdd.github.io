@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Googleprojectzero | My Octopress Blog]]></title>
+  <title><![CDATA[Category: googleprojectzero | My Octopress Blog]]></title>
   <link href="http://binerdd.github.io/blog/categories/googleprojectzero/atom.xml" rel="self"/>
   <link href="http://binerdd.github.io/"/>
-  <updated>2015-08-03T21:07:01+09:00</updated>
+  <updated>2015-08-03T21:12:55+09:00</updated>
   <id>http://binerdd.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>

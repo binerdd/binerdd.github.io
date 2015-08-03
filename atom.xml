@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://binerdd.github.io/atom.xml" rel="self"/>
   <link href="http://binerdd.github.io/"/>
-  <updated>2015-08-03T21:07:01+09:00</updated>
+  <updated>2015-08-03T21:12:55+09:00</updated>
   <id>http://binerdd.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -457,7 +457,7 @@ Thu Jun <span class="m">18</span> 21:57:48 PDT 2015
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Howto Install Jekyll on Windows]]></title>
+    <title type="html"><![CDATA[Howto Install Jekyll On Windows]]></title>
     <link href="http://binerdd.github.io/blog/2015/02/08/howto-install-jekyll-on-windows/"/>
     <updated>2015-02-08T12:00:25+09:00</updated>
     <id>http://binerdd.github.io/blog/2015/02/08/howto-install-jekyll-on-windows</id>
