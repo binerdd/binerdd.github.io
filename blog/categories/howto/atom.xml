@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: howto | 99 Cruster]]></title>
+  <link href="http://www.99cruster.com/blog/categories/howto/atom.xml" rel="self"/>
+  <link href="http://www.99cruster.com/"/>
+  <updated>2016-04-04T00:32:34+09:00</updated>
+  <id>http://www.99cruster.com/</id>
+  <author>
+    <name><![CDATA[binerdd]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Howto Install Jekyll On Windows]]></title>
+    <link href="http://www.99cruster.com/blog/2015/02/08/howto-install-jekyll-on-windows/"/>
+    <updated>2015-02-08T12:00:25+09:00</updated>
+    <id>http://www.99cruster.com/blog/2015/02/08/howto-install-jekyll-on-windows</id>
+    <content type="html"><![CDATA[<h1>시작하기 전</h1>
+
+<p>친절한 가이드와 달리 설치과정에서 수많은 에러를 만나게 된다&hellip; 당황하지 말고 설치를 성공해보자.</p>
+
+<h1>파일 다운로드</h1>
+
+<p><a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.1.5.exe?direct">Ruby Installer</a> <br>
+<a href="http://cdn.rubyinstaller.org/archives/devkits/DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe">Ruby DevTools</a> <br>
+<a href="https://www.python.org/ftp/python/2.7.9/python-2.7.9.msi">Python 2.7</a> <br>
+<a href="https://bootstrap.pypa.io/get-pip.py">pip</a></p>
+
+<h1>Ruby 및 DevTools 설치</h1>
+
+<p>먼저 Ruby 2.1.5 32bit 버전을 설치한 후(설치 옵션에서 &ldquo;Add Ruby Executables to your PATH&rdquo; 선택),
+Ruby DevTools를 C:\RubyDevTools 폴더에 압축을 푼다.</p>
+
+<p>(만약 빈폴더에 압축을 풀지 않으면, 해제되는 파일들이 기존파일들과 섞여버려서 구분이 안됨)</p>
+
+<p>C:\RubyDevKit 폴더에 들어가면 dk.rb 라는 루비 파일이 있는데 아래와 같이 옵션을 주어 실행한다.<br>
+<b>설치과정에서 사용하는 명령창은 RubyDevTools 폴더안에 있는 mingw를 사용하는 것이 편하다</b>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ruby dk.rb init
+ruby dk.rb install</code></pre></div></p>
+
+<h1>환경변수 설정</h1>
+
+<p>C:\RubyDevTools\bin 폴더를 시스템 환경변수 PATH에 추가하도록 하자.
+(설정을 안하면, 설치과정에서 실행하는 파일들의 경로를 찾지못하는 에러 발생)</p>
+
+<h1>Jekyll 설치</h1>
+
+<p><div class="highlight"><pre><code class="language-bash" data-lang="bash">gem install jekyll</code></pre></div></p>
+
+<p>위 명령어를 명령창에서 실행하면 아래와 유사하게 ssl 검증을 할 수 없다는 에러 메시지가 출력된다.</p>
+
+<p><div class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;gem install jekyll
+ERROR: Could not find a valid gem <span class="p">&amp;</span>lsquo<span class="p">;</span>jekyll<span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="o">(</span>&gt;<span class="o">=</span> 0<span class="o">)</span>, here is why:
+Unable to download data from &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://rubygems.org/&quot;</span>&gt;https://rubygems.org/&lt;/a&gt;
+- SSL_connect <span class="nv">returned</span><span class="o">=</span><span class="m">1</span> <span class="nv">errno</span><span class="o">=</span><span class="m">0</span> <span class="nv">state</span><span class="o">=</span>SSLv3 <span class="nb">read</span>
+server certificate B: certificate verify failed
+<span class="o">(</span>&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://rubygems.org/latest_specs.4.8.gz&quot;</span>&gt;https://rubygems.org/latest_specs.4.8.gz&lt;/a&gt;<span class="o">)</span></code></pre></div></p></blockquote>
+
+<p>이럴 경우 gem 의 소스 url을 HTTP 주소로 아래와 같이 바꿔주면 된다.</p>
+
+<p><div class="highlight"><pre><code class="language-bash" data-lang="bash">gem <span class="nb">source</span> -r &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://rubygems.org&quot;</span>&gt;https://rubygems.org&lt;/a&gt;
+gem <span class="nb">source</span> -a &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;http://rubygems.org&quot;</span>&gt;http://rubygems.org&lt;/a&gt;</code></pre></div></p>
+
+<h1>Python 설치</h1>
+
+<p>Jekyll에서는 syntax highlighting을 제공하기 위해 Pygments 라는 것을 사용하는데, 윈도우에서 이를 사용하기 위해서는
+Python 기반의 버전을 설치해야한다.
+<b>파이썬 2.7 버전</b>을 설치할때, 마찬가지로 파이썬 경로를 시스템 환경변수에 추가하는 옵션을 활성화하도록 한다.</p>
+
+<p>설치가 완료되면, 다운받은 get-pip.py파일을 파이썬으로 실행시킨다.
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">python get-pip.py</code></pre></div>
+그리고 Pygments 설치
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">python -m pip install Pygments</code></pre></div></p>
+
+<p>이후에 Pygments 를 syntax highlighter로 사용할때는, jekyll로 생성한 사이트 폴더에 있는 _config.yml 파일에 옵션으로 설정해주면 된다.
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">highlighter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pygments</span></code></pre></div></p>
+
+<h1>wdm 설치</h1>
+
+<p>Jekyll 2.4버전 부터는 자동으로 사이트 폴더를 모니터링하면서 변화가 있을 경우 다시 빌드해주는 기능이 기본적으로 탑재되어있다. <div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll serve</code></pre></div></p>
+
+<p>위 명령어의 기능을 활용하기 위해서는 윈도우에서 wdm 이라는 gem을 설치해야한다.
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">gem install wdm</code></pre></div></p>
+
+<h1>Jekyll 실행하기</h1>
+
+<p>사이트를 생성하고자 하는 경로로 이동한 다음, jekyll를 통해 새로운 사이트를 생성한다.
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll new &lt;name of the site&gt;</code></pre></div></p>
+
+<p>그 후 생성된 사이트 폴더로 이동하고 jekyll를 통해 로컬 서버를 실행시키면 웹브라우저를 통해 (127.0.0.1:4000) 사이트의 모습을 동적으로 확인할 수 있다.
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> &lt;site folder&gt;
+jekyll serve</code></pre></div></p>
+
+<p>Jekyll의 다양한 기능 및 옵션들에 대해서는 <a href="http://jekyllrb.com">공식사이트</a>를 참고합시다.</p>
+
+<h1>References</h1>
+
+<p><a href="http://jekyll-windows.juthilo.com/1-ruby-and-devkit/">http://jekyll-windows.juthilo.com/1-ruby-and-devkit/</a><br>
+<a href="http://jekyllrb.com">http://jekyllrb.com</a><br>
+<a href="http://codingtips.kanishkkunal.in/ssl-error-ruby-gems-windows/">http://codingtips.kanishkkunal.in/ssl-error-ruby-gems-windows/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

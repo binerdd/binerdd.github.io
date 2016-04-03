@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: android | 99 Cruster]]></title>
+  <link href="http://www.99cruster.com/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://www.99cruster.com/"/>
+  <updated>2016-04-04T00:32:34+09:00</updated>
+  <id>http://www.99cruster.com/</id>
+  <author>
+    <name><![CDATA[binerdd]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Overview of Attack Surfaces in Android Apps]]></title>
+    <link href="http://www.99cruster.com/blog/2015/08/11/what-is-an-android-service/"/>
+    <updated>2015-08-11T21:35:46+09:00</updated>
+    <id>http://www.99cruster.com/blog/2015/08/11/what-is-an-android-service</id>
+    <content type="html"><![CDATA[<p>When auditing the security of Android apps, it is crucial to enumerate attack surfaces available. There are 3 main attack surfaces available in an Android app: Service, Broadcast Receiver, Content Provider.</p>
+
+<h1>Android Service</h1>
+
+<p>According to <a href="http://developer.android.com/reference/android/app/Service.html">Google</a>, a service is an application component representing either an application&rsquo;s desire to perform a longer-running operation while not interacting with the user or to supply functionality for other applications to use. So it can be thought as background process without an graphical interface.</p>
+
+<p>Service can be either started or bound. When a service is started, it</p>
+
+<p>When auditing, one can check which services are available by searching for <code>&lt;service&gt;</code> element tag in <code>AndroidManifest.xml</code> file. There can be many or none, but it is important to distinguish which service is actually reachable from outside the app.</p>
+
+<h2>Finding out which services are reachable</h2>
+
+<p>Example of a service is as follows:</p>
+
+<p>As you can see, services have attributes that need to be considered before digging deep in to the code. Certain attributes make services not interactable. For a complete reference, checkout <a href="http://developer.android.com/guide/topics/manifest/service-element.html">android API guide</a>.</p>
+
+<h4>android:exported</h4>
+
+<p>This attribute defines whether this service is exported outside so that components of other apps can interact with it. If this attribute is set to <code>False</code>, there is no need to investigate further. Default value is <code>True</code>.</p>
+
+<h4>android:enabled</h4>
+
+<p>Although not shown in previous examples, if this value set to false then this service cannot be instantiated, meaning it cannot be run. Default value is <code>True</code>.</p>
+
+<h4>android:permission</h4>
+
+<p>This attribute sets name of the permission an entitiy must have in order to lauch or bind with the service. If this options is not set, service inherits permission set by <code>&lt;application&gt;</code> element. Therefore if we don&rsquo;t have the specified permission, we cannot interact with the service.</p>
+
+<h4>android:name</h4>
+
+<p>This is the name of the <code>Service</code> subclass that implements the service. When a service is reachable from outside and it is worth looking at closely, value of <code>android:name</code> must be searched inside the decompiled code.</p>
+
+<h2>Example</h2>
+
+<p><div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;service</span> <span class="na">android:exported=</span><span class="s">&quot;false&quot;</span> <span class="na">android:name=</span><span class="s">&quot;.FotaRegisterService&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;intent-filter&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&quot;com.sec.android.fotaclient&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/intent-filter&gt;</span>
+<span class="nt">&lt;/service&gt;</span></code></pre></div></p>
+
+<h1>Broadcast Receivers</h1>
+
+<p>Broadcast Receivers receive intents that are broadcasted by the system or other apps. Broadcast Receivers can be statically declared in the <code>AndroidManifest.xml</code> or dynamically in the code by <code>Context.registerReceiver()</code> method. Because it processes external data(which is intent), it is an another attack surface that should be looked closely. Difference between starting a service is that intent has a specific target(service) wheras broadcast does not have a specific destination and it is up to the broadcast receiver to process it or not.</p>
+
+<h2>Finding out which broascast receivers are reachable</h2>
+
+<p>Unfortunately, it is same for broadcast receivers that attributes must be looked at closely in order to distinguish receivers that is reachable from the outside. For a full reference of the attributes, refer to the <a href="http://developer.android.com/guide/topics/manifest/receiver-element.html">android API guide</a>.</p>
+
+<h4>android:exported</h4>
+
+<p>This attribute defines whether the broadcast receiver can receive broadcast from outside of the application. Set to <code>True</code> if it can, <code>False</code> if not.</p>
+
+<h4>android:enabled</h4>
+
+<p>If this value set to <code>false</code> then this receiver cannot be instantiated, meaning it cannot be run. Default value is <code>True</code>.</p>
+
+<h4>android:permission</h4>
+
+<p>This is the name of a permission that broascasters must have in order to send broadcasts to this specific receiver. Therefore, without this permission it is impossible to trigger the vulnereability in the receiver. If it is not set, recevier inherits permission set by the <code>&lt;application&gt;</code> element&rsquo;s <code>permission</code> attribute. If neither is set, no permission is needed to send broadcasts.</p>
+
+<h4>android:name</h4>
+
+<p>This is the name of the class that implements the broadcast receiver. Value of <code>android:name</code> should be searched inside the code in order to look more deeply.</p>
+
+<h2>Example</h2>
+
+<p><div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;receiver</span> <span class="na">android:exported=</span><span class="s">&quot;false&quot;</span> <span class="na">android:name=</span><span class="s">&quot;.FotaRegisterService&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;&lt;/receiver&gt;</span></code></pre></div></p>
+
+<h1>Content Providers</h1>
+
+<p><code>&lt;provider&gt;</code> element declares a content provider component. Content provider provides structured access to data managed by the application. Data can be accessed by using URIs defined in the <code>android:authorities</code> element in the manifest file. If content provider is not appropriately secured by setting attributes, its contents can be leaked.</p>
+
+<h2>Finding out which content providers are reachable</h2>
+
+<p>Below are attributes that must be considered before diving into the provider for possible leakage of data. These define whether it is accessible from outside the app, etc.</p>
+
+<h4>android:authorities</h4>
+
+<p>This attribute lists URI authorities that identify data offered by the content provider. Naming convention is using full package name and the provider name.</p>
+
+<p>Example: <code>com.example.provider.providername</code></p>
+
+<p>Authority name is usually the name of the class that implements <code>ContentProvider</code>.</p>
+
+<h4>android:enabled</h4>
+
+<p>If this value set to <code>false</code> then this content provider cannot be instantiated, meaning it cannot be run. Default value is <code>True</code>.</p>
+
+<p><code>&lt;application&gt;</code> element has its own <code>enabled</code> attribute that applies to all of the application components. Therefore <code>enabled</code> attribute of <code>&lt;application&gt;</code> and <code>&lt;provider&gt;</code> must equal to <code>true</code> in order to be enabled.</p>
+
+<h4>android:exported</h4>
+
+<p>This attribute defines whether the provider is available to other applications. Set to <code>True</code> if it can, <code>False</code> to only allow applications that have same user ID(UID).</p>
+
+<h4>android:permission</h4>
+
+<p>Defines name of the permission that one must have in order to read/write to the data. However, permission defined here is overwritten by <code>android:readPermssion</code> and <code>android:writePermission</code>.</p>
+
+<h2>Example</h2>
+
+<p><div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;provider</span> <span class="na">android:exported=</span><span class="s">&quot;false&quot;</span> <span class="na">android:name=</span><span class="s">&quot;.FotaRegisterService&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;&lt;/provider&gt;</span></code></pre></div></p>
+
+<h1>Reference</h1>
+
+<p><a href="http://translate.wooyun.io/2015/08/05/Android-Service-Security.html">http://translate.wooyun.io/2015/08/05/Android-Service-Security.html</a>
+<a href="http://translate.wooyun.io/2015/07/22/Android-Broadcast-Security.html">http://translate.wooyun.io/2015/07/22/Android-Broadcast-Security.html</a>
+<a href="http://developer.android.com/">http://developer.android.com/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

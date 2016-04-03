@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://www.99cruster.com/blog/2015/08/11/what-is-an-android-service/</loc>
+<lastmod>2015-08-11T21:35:46+09:00</lastmod>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/2015/07/10/analysis-and-exploitation-of-eset-vulnerability-kor/</loc>
+<lastmod>2015-07-10T07:00:25+09:00</lastmod>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/2015/02/08/howto-install-jekyll-on-windows/</loc>
+<lastmod>2015-02-08T12:00:25+09:00</lastmod>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/archives/</loc>
+</url>
+<url>
+<loc>http://www.99cruster.com/</loc>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/categories/howto/</loc>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/categories/translation/</loc>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/categories/googleprojectzero/</loc>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/categories/android/</loc>
+</url>
+</urlset>
