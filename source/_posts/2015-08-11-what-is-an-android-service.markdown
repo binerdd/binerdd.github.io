@@ -4,6 +4,7 @@ title: "Overview of Attack Surfaces in Android Apps"
 date: 2015-08-11 21:35:46 +0900
 comments: true
 categories: android 
+published: false
 ---
 
 When auditing the security of Android apps, it is crucial to enumerate attack surfaces available. There are 3 main attack surfaces available in an Android app: Service, Broadcast Receiver, Content Provider. 
