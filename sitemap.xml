@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://www.99cruster.com/blog/2015/08/11/what-is-an-android-service/</loc>
-<lastmod>2015-08-11T21:35:46+09:00</lastmod>
+<loc>http://www.99cruster.com/blog/2016/05/02/google-ctf-2016-unbreakable-enterprise-product-activation-writeup-using-angr/</loc>
+<lastmod>2016-05-02T22:51:15+09:00</lastmod>
 </url>
 <url>
 <loc>http://www.99cruster.com/blog/2015/07/10/analysis-and-exploitation-of-eset-vulnerability-kor/</loc>
@@ -28,6 +28,12 @@
 <loc>http://www.99cruster.com/blog/categories/googleprojectzero/</loc>
 </url>
 <url>
-<loc>http://www.99cruster.com/blog/categories/android/</loc>
+<loc>http://www.99cruster.com/blog/categories/ctf/</loc>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/categories/googlectf/</loc>
+</url>
+<url>
+<loc>http://www.99cruster.com/blog/categories/reversing/</loc>
 </url>
 </urlset>
